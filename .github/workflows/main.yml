@@ -43,15 +43,21 @@ jobs:
         cd ..
 
     - name: Push redis database file to main branch
-      uses: actions-x/commit@v6
-      with:
-        email: github-actions@noreply.github.com
-        name: github-actions
-        message: 'update database'
-        branch: main
-        files: dump.rdb
-        token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+      # uses: actions-x/commit@v6
+      # with:
+      #   email: github-actions@noreply.github.com
+      #   name: github-actions
+      #   message: 'update database'
+      #   branch: main
+      #   files: dump.rdb
+      #   token: ${{ secrets.GITHUB_TOKEN }}
+      #   force: true
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add dump.rdb
+        git commit -m "update database"
+        git push
 
     - name: Checkout output branch
       uses: actions/checkout@main
